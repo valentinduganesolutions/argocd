@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: k-lab-cluster-addons  # The name of the ApplicationSet
+  namespace: argocd  # The namespace in which the ApplicationSet is created
+spec:
+
+  generators:  # A list of generators that create applications
+    - git:  # Generator for applications that are stored in a git repository
+        repoURL: https://github.com/valentinduganesolutions/argocd.git # URL of the git repository
+        revision: HEAD  # The revision of the repository to use
+        directories:
+          - path: cluster-addons/k-lab/*  # The directories within the repository that contain the applications
+
+  
+  template:  # The template used to create the applications in the ApplicationSet
+    metadata:
+      name: "k-lab-{{path.basename}}"  # The name of the application created by the template
+    spec:
+      project: default  # The project in which the applications are created
+
+
+      source:
+        repoURL: https://github.com/valentinduganesolutions/argocd.git  # The URL of the git repository
+        targetRevision: HEAD  # The revision of the repository to use
+        path: "{{path}}"  # The path within the repository that contains the applications
+
+
+      destination:
+        server: '{{url}}'  # The destination cluster where the applications are deployed
+
+
+      syncPolicy:
+        automated:
+          prune: true  # Remove resources that are no longer in the git repository
+          selfHeal: true  # Automatically fix discrepancies between the deployed resources and the git repository
+          allowEmpty: false  # Don't allow the deployment of an application if there are no resources in it
+      ignoreDifferences:
+        - group: apps.emqx.io
+          kind: EMQX
+          jqPathExpressions:
+            - .spec.bootstrapConfig  # Ignore differences in the bootstrapConfig field of EMQX resources
