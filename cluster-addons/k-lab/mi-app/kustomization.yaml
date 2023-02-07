@@ -1,4 +1,5 @@
 
-namespace: infrastructure
+
 resources:
   - deployment.yaml
+  - ns.yaml
