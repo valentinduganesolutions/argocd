@@ -23,7 +23,7 @@ spec:
       source:
         repoURL: https://github.com/valentinduganesolutions/argocd.git  # The URL of the git repository
         targetRevision: HEAD  # The revision of the repository to use
-        path: "cluster-addons/k-lab/*"  # The path within the repository that contains the applications
+        path: "{{path}}"  # The path within the repository that contains the applications
 
 
       destination:
