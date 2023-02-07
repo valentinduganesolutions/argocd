@@ -35,6 +35,7 @@ spec:
           prune: true  # Remove resources that are no longer in the git repository
           selfHeal: true  # Automatically fix discrepancies between the deployed resources and the git repository
           allowEmpty: false  # Don't allow the deployment of an application if there are no resources in it
+          createNamespace: true
       ignoreDifferences:
         - group: apps.emqx.io
           kind: EMQX
