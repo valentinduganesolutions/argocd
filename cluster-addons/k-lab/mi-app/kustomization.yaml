@@ -1,2 +1,4 @@
+
+namespace: infrastructure
 resources:
   - deployment.yaml
