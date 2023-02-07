@@ -10,7 +10,7 @@ spec:
         repoURL: https://github.com/valentinduganesolutions/argocd.git # URL of the git repository
         revision: HEAD  # The revision of the repository to use
         directories:
-          - path: cluster-addons/k-lab/mi-app/*  # The directories within the repository that contain the applications
+          - path: cluster-addons/k-lab/*  # The directories within the repository that contain the applications
 
   
   template:  # The template used to create the applications in the ApplicationSet
