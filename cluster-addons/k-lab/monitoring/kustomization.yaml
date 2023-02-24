@@ -1,0 +1,12 @@
+namespace: infrastructure
+
+resources:
+  - ./0-prometheus-stack/0-cluster-operator.yml
+
+secretGenerator:
+- name: additional-scrape-configs  # Generate a secret using the file below
+  files:
+  - ./0-prometheus-stack/prometheus-additional.yml
+
+generatorOptions:
+ disableNameSuffixHash: true  # If false, secret name will contain a hash. E.g. 'additional-scrape-configs-d8mk8f9927'
