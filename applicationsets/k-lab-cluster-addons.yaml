@@ -37,6 +37,8 @@ spec:
           allowEmpty: false  # Don't allow the deployment of an application if there are no resources in it
         syncOptions:
           - RespectIgnoreDifferences=true
+          - ServerSideApply=true
+
       ignoreDifferences:
         - group: admissionregistration.k8s.io
           kind: ValidatingWebhookConfiguration
