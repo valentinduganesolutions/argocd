@@ -1,3 +1,3 @@
 resources:
-- ./operator/5.2.1/install/namespace/kustomization.yaml
-- ./operator/5.2.1/install/default/kustomization.yaml
+- ./operator/5.2.1/install/namespace/
+- ./operator/5.2.1/install/default/
