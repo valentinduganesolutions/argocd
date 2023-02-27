@@ -1,0 +1,95 @@
+resources:
+- manager.yaml
+- manager-upgrade.yaml
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: CHECK_FOR_UPGRADES
+          value: "false"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/0
+        value:
+          name: PGO_NAMESPACE
+          value: ""
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1
+        value:
+          name: CRUNCHY_DEBUG
+          value: "false"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/2
+        value:
+          name: RELATED_IMAGE_POSTGRES_13
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres:ubi8-13.8-1"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/3
+        value:
+          name: RELATED_IMAGE_POSTGRES_13_GIS_3.0
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres-gis:ubi8-13.8-3.0-1"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/4
+        value:
+          name: RELATED_IMAGE_POSTGRES_13_GIS_3.1
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres-gis:ubi8-13.8-3.1-1"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/5
+        value:
+          name: RELATED_IMAGE_POSTGRES_14
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres:ubi8-14.5-1"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/6
+        value:
+          name: RELATED_IMAGE_POSTGRES_14_GIS_3.1
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres-gis:ubi8-14.5-3.1-1"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/7
+        value:
+          name: RELATED_IMAGE_POSTGRES_14_GIS_3.2
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres-gis:ubi8-14.5-3.2-1"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/8
+        value:
+          name: RELATED_IMAGE_PGADMIN
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-pgadmin4:ubi8-4.30-4"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/9
+        value:
+          name: RELATED_IMAGE_PGBACKREST
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-pgbackrest:ubi8-2.40-1"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/10
+        value:
+          name: RELATED_IMAGE_PGBOUNCER
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-pgbouncer:ubi8-1.17-1"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/11
+        value:
+          name: RELATED_IMAGE_PGEXPORTER
+          value: "eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres-exporter:ubi8-5.2.1-0"
+
+    target:
+      kind: Deployment
+      name: pgo
+
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/0
+        value:
+          name: PGO_NAMESPACE
+          value: ""
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1
+        value:
+          name: CRUNCHY_DEBUG
+          value: "false"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/2
+        value:
+          name: RELATED_IMAGE_PGUPGRADE
+          value: eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-upgrade:ubi8-5.2.1-0
+    target:
+      kind: Deployment
+      name: pgo-upgrade
