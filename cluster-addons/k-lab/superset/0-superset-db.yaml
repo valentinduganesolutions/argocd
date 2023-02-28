@@ -24,32 +24,6 @@ spec:
           cpu: "0.5"
           memory: 1Gi
 
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: "nodeType"
-                    operator: "In"
-                    values:
-                      - "analytics"
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              podAffinityTerm:
-                topologyKey: kubernetes.io/hostname
-                labelSelector:
-                  matchLabels:
-                    postgres-operator.crunchydata.com/cluster: superset-db
-                    postgres-operator.crunchydata.com/instance-set: "00"
-
-      tolerations:
-        - key: "scope"
-          value: "analytics"
-          operator: "Equal"
-          effect: "NoSchedule"
-
-
   backups:
     pgbackrest:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.38-2
