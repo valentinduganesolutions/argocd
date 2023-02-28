@@ -5,7 +5,7 @@ namespace: infrastructure
 
 resources:
   - ./0-prometheus-stack/0-cluster-operator.yml
-
+  - ./namespace.yaml
 secretGenerator:
 - name: additional-scrape-configs  # Generate a secret using the file below
   files:
