@@ -1,0 +1,107 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: superset-db
+  namespace: infrastructure
+spec:
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.4-0
+  postgresVersion: 14
+  instances:
+    - replicas: 2
+      dataVolumeClaimSpec:
+        accessModes:
+          - "ReadWriteOnce"
+
+        resources:
+          requests:
+            storage: 1Gi
+
+      resources:
+        requests:
+          cpu: "0.5"
+          memory: 1Gi
+        limits:
+          cpu: "0.5"
+          memory: 1Gi
+
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "nodeType"
+                    operator: "In"
+                    values:
+                      - "analytics"
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels:
+                    postgres-operator.crunchydata.com/cluster: superset-db
+                    postgres-operator.crunchydata.com/instance-set: "00"
+
+      tolerations:
+        - key: "scope"
+          value: "analytics"
+          operator: "Equal"
+          effect: "NoSchedule"
+
+
+  backups:
+    pgbackrest:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.38-2
+      repos:
+        - name: repo1
+          volume:
+            volumeClaimSpec:
+              accessModes:
+                - "ReadWriteOnce"
+              resources:
+                requests:
+                  storage: 1Gi
+  monitoring:
+    pgmonitor:
+      exporter:
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.1.2-0
+  users:
+    - name: superset-db
+      databases:
+        - "superset-db"
+
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        parameters:
+
+          # https://pgtune.leopard.in.ua
+          # DB Version: 14
+          # OS Type: linux
+          # DB Type: web
+          # Total Memory (RAM): 1600 MB
+          # CPUs num: 1
+          # Connections num: 30
+          # Data Storage: ssd
+
+          #tune memory
+          work_mem: 6826kB
+          shared_buffers: 400MB
+          maintenance_work_mem: 100MB
+          effective_cache_size: 1200MB
+
+          #tune WAL
+          wal_buffers: 12MB
+          min_wal_size: 500MB
+          max_wal_size: 1GB
+
+          #other settings
+          default_statistics_target: 100
+          random_page_cost: 1.1
+          checkpoint_completion_target: 0.9
+          max_connections: 30
+          effective_io_concurrency: 200
+
+
+
