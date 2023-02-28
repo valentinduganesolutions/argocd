@@ -4,7 +4,6 @@ metadata:
   name: argocd-rbac-cm
   namespace: argocd
 data:
-  kustomize.buildOptions: --enable-helm
   policy.default: role:none
   policy.csv: |
     p, role:none, *, *, */*, deny
