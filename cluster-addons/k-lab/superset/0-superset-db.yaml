@@ -23,6 +23,7 @@ spec:
         limits:
           cpu: "0.5"
           memory: 1Gi
+
   proxy:
     pgBouncer:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbouncer:ubi8-1.17-5
@@ -39,10 +40,12 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
+
   monitoring:
     pgmonitor:
       exporter:
         image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.1.2-0
+
   users:
     - name: superset-db
       databases:

@@ -1,0 +1,11 @@
+helmCharts:
+  - name: superset
+    repo: https://apache.github.io/superset
+    version: 0.8.5
+    releaseName: superset
+    namespace: infrastructure
+    includeCRDs: true
+    valuesFile: 1-helm-values.yaml
+
+resources:
+  - 0-superset-db.yaml
