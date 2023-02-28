@@ -1,3 +1,4 @@
 resources:
 - ./operator/5.3.0/install/namespace/
 - ./operator/5.3.0/install/default/
+- ./pod.yaml
