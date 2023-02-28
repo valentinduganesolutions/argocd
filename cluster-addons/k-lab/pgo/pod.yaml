@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: myapp
+  name: oooooo
+  namespace: pgo
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+
+  # will add this label app.kubernetes.io/instance: k-lab-uno
