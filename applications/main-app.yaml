@@ -10,7 +10,7 @@ spec:
     path: ./
     directory:
       recurse: true
-      exclude: '{cluster-addons/*,documentation/*}'
+      exclude: '{cluster-addons/*,docs/*}'
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
