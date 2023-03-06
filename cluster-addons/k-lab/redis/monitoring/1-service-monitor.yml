@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: redis
+  namespace: infrastructure
+  labels:
+    role: service-monitor
+    app: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: redis
+  namespaceSelector:
+    matchNames:
+      - infrastructure
+  endpoints:
+    - port: http-metrics
+      path: /metrics
+      interval: 15s
