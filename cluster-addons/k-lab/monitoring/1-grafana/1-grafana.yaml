@@ -4,7 +4,19 @@ metadata:
   name: grafana
 spec:
   baseImage: grafana/grafana:9.3.6
+
   deployment:
+    env:
+    - name: GF_DATABASE_TYPE
+      value: postgres
+    - name: GF_DATABASE_HOST
+      value: grafana-db-primary:5432
+    - name: GF_DATABASE_NAME
+      value: grafana-db
+    - name: GF_DATABASE_USER
+      value: one
+    - name: GF_DATABASE_PASSWORD
+      value: one
     replicas: 3
   ingress:
     enabled: False
