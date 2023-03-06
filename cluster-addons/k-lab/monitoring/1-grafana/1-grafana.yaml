@@ -6,11 +6,19 @@ spec:
   containers: 
     - name: grafana
       image: grafana/grafana:9.3.6
-  #     env:
-  #     - name: GF_DATABASE_USER
-  #       value: one
-  #     - name: GF_DATABASE_PASSWORD
-  #       value: one
+      ports:
+        - containerPort: 3000
+      env:
+        - name: GF_DATABASE_TYPE
+          value: postgres
+        - name: GF_DATABASE_HOST
+          value: grafana-db-primary:5432
+        - name: GF_DATABASE_NAME
+          value: grafana-db
+        - name: GF_DATABASE_USER
+          value: one
+        - name: GF_DATABASE_PASSWORD
+          value: one
   baseImage: grafana/grafana:9.3.6
   deployment:
     replicas: 3
@@ -22,14 +30,14 @@ spec:
       level: "warn"
     auth.anonymous:
       enabled: False
-    database:
-      host: grafana-db-primary:5432
-      name: grafana-db
-      #TODO replace credentials here
-      user: one
-      password: one
-      ssl_mode: require
-      type: postgres
+    # database:
+    #   host: grafana-db-primary:5432
+    #   name: grafana-db
+    #   #TODO replace credentials here
+    #   user: one
+    #   password: one
+    #   ssl_mode: require
+    #   type: postgres
   dashboardLabelSelector:
     - matchExpressions:
         - {key: app, operator: In, values: [grafana]}
