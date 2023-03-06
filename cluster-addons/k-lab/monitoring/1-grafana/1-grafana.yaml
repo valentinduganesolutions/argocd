@@ -14,7 +14,7 @@ spec:
     - name: GF_DATABASE_NAME
       value: grafana-db
     - name: GF_DATABASE_USER
-      value: two
+      value: one
     - name: GF_DATABASE_PASSWORD
       value: one
     replicas: 3
