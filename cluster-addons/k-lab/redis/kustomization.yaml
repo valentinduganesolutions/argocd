@@ -1,3 +1,4 @@
 resources:
   - ./operator/1.2.3/0-crd.yaml
   - ./operator/1.2.3/1-operator.yaml
+  - ./integration/1-redis.yaml

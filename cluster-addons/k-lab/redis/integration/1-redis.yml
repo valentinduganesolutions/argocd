@@ -1,0 +1,49 @@
+apiVersion: databases.spotahome.com/v1
+kind: RedisFailover
+metadata:
+  name: redisfailover
+  namespace: infrastructure
+spec:
+  sentinel:
+    replicas: 3
+    image: redis:7.0.5-alpine
+    exporter:
+      enabled: true
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        cpu: 50m
+        memory: 100Mi
+  redis:
+    replicas: 3
+    image: redis:7.0.5-alpine
+    exporter:
+      enabled: true
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+    storage:
+      keepAfterDeletion: true
+      persistentVolumeClaim:
+        metadata:
+          name: redis-data
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+    customConfig:
+      - "notify-keyspace-events Ex"
+      - "client-output-buffer-limit pubsub 268435456 67108864 0"
+    resources:
+      requests:
+        cpu: 200m
+        memory: 200Mi
+      limits:
+        cpu: 400m
+        memory: 400Mi
