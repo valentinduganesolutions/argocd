@@ -3,14 +3,14 @@ kind: Grafana
 metadata:
   name: grafana
 spec:
-  containers: 
-    - name: first
-      image: grafana/grafana:9.3.6
-      env:
-      - name: GF_DATABASE_USER
-        value: one
-      - name: GF_DATABASE_PASSWORD
-        value: one
+  # containers: 
+  #   - name: first
+  #     image: grafana/grafana:9.3.6
+  #     env:
+  #     - name: GF_DATABASE_USER
+  #       value: one
+  #     - name: GF_DATABASE_PASSWORD
+  #       value: one
   baseImage: grafana/grafana:9.3.6
   deployment:
     replicas: 3
