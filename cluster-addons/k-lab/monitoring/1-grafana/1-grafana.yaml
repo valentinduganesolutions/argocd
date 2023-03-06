@@ -26,14 +26,14 @@ spec:
       level: "warn"
     auth.anonymous:
       enabled: False
-    database:
-      host: grafana-db-primary:5432
-      name: grafana-db
-      #TODO replace credentials here
-      user: one
-      password: one
-      ssl_mode: require
-      type: postgres
+    # database:
+    #   host: grafana-db-primary:5432
+    #   name: grafana-db
+    #   #TODO replace credentials here
+    #   user: one
+    #   password: one
+    #   ssl_mode: require
+    #   type: postgres
   dashboardLabelSelector:
     - matchExpressions:
         - {key: app, operator: In, values: [grafana]}
