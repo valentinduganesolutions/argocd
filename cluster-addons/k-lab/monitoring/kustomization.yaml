@@ -4,8 +4,12 @@ kind: Kustomization
 namespace: infrastructure
 
 resources:
-  - ./0-prometheus-stack/0-cluster-operator.yml
   - ./namespace.yaml
+  - ./0-prometheus-stack/0-cluster-operator.yml
+  - ./1-grafana/
+
+
+
 secretGenerator:
 - name: additional-scrape-configs  # Generate a secret using the file below
   files:
