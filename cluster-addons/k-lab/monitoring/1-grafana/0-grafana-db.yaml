@@ -4,7 +4,7 @@ metadata:
   name: grafana-db
   namespace: infrastructure
 spec:
-  image: eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres:ubi8-14.4-0
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:ubi8-14.4-0
   postgresVersion: 14
   instances:
     - replicas: 2
@@ -26,7 +26,7 @@ spec:
                     postgres-operator.crunchydata.com/instance-set: "00"
   backups:
     pgbackrest:
-      image: eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-pgbackrest:ubi8-2.38-2
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:ubi8-2.38-2
       global:
         repo1-retention-full: "14"
         repo1-retention-full-type: time
@@ -45,7 +45,7 @@ spec:
   monitoring:
     pgmonitor:
       exporter:
-        image: eu.gcr.io/compelling-cat-212513/crunchydata/crunchy-postgres-exporter:ubi8-5.1.2-0
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.1.2-0
   users:
     - name: grafana-db
       databases:
