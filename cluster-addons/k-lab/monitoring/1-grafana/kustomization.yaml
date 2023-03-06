@@ -1,0 +1,7 @@
+namespace: infrastructure
+
+resources:
+  - ./operator/4.8.0/0-grafana-operator.yaml
+  - ./0-grafana-db.yaml
+  - ./1-grafana.yaml
+  - ./2-prometheus-datasource.yaml

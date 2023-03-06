@@ -1,0 +1,27 @@
+apiVersion: integreatly.org/v1alpha1
+kind: Grafana
+metadata:
+  name: grafana
+spec:
+  baseImage: grafana/grafana:9.3.6
+  deployment:
+    replicas: 3
+  ingress:
+    enabled: False
+  config:
+    log:
+      mode: "console"
+      level: "warn"
+    auth.anonymous:
+      enabled: False
+    database:
+      host: grafana-db-primary:5432
+      name: grafana-db
+      #TODO replace credentials here
+      user: <username>
+      password: <password>
+      ssl_mode: require
+      type: postgres
+  dashboardLabelSelector:
+    - matchExpressions:
+        - {key: app, operator: In, values: [grafana]}
