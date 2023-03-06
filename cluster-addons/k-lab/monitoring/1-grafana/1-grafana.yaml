@@ -29,7 +29,7 @@ spec:
       mode: "console"
       level: "warn"
     auth.anonymous:
-      enabled: False
+      enabled: true
     # database:
     #   host: grafana-db-primary:5432
     #   name: grafana-db
