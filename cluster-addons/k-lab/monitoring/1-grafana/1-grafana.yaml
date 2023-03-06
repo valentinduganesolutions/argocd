@@ -9,6 +9,8 @@ spec:
       env:
       - name: GF_DATABASE_USER
         value: one
+      - name: GF_DATABASE_PASSWORD
+        value: one
   baseImage: grafana/grafana:9.3.6
   deployment:
     replicas: 3
@@ -24,8 +26,8 @@ spec:
       host: grafana-db-primary:5432
       name: grafana-db
       #TODO replace credentials here
-      user: username
-      password: password
+      #user: username
+      #password: password
       ssl_mode: require
       type: postgres
   dashboardLabelSelector:
