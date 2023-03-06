@@ -3,6 +3,11 @@ kind: Grafana
 metadata:
   name: grafana
 spec:
+  containers: 
+    - name: first
+      env:
+      - name: GF_DATABASE_USER
+        value: one
   baseImage: grafana/grafana:9.3.6
   deployment:
     replicas: 3
