@@ -17,9 +17,12 @@ spec:
     database:
       host: grafana-db-primary:5432
       name: grafana-db
-      #TODO replace credentials here
-      user: <username>
-      password: <password>
+      userSecret:
+        name: grafana-admin-credentials
+        key: GF_SECURITY_ADMIN_PASSWORD
+      passwordSecret:
+        name: grafana-admin-credentials
+        key: GF_SECURITY_ADMIN_USER
       ssl_mode: require
       type: postgres
   dashboardLabelSelector:
