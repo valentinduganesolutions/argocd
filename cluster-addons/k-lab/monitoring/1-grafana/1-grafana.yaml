@@ -3,9 +3,9 @@ kind: Grafana
 metadata:
   name: grafana
 spec:
-  # containers: 
-  #   - name: first
-  #     image: grafana/grafana:9.3.6
+  containers: 
+    - name: first
+      image: grafana/grafana:9.3.6
   #     env:
   #     - name: GF_DATABASE_USER
   #       value: one
