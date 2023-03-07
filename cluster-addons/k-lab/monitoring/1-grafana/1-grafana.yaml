@@ -4,26 +4,28 @@ metadata:
   name: grafana
 spec:
   baseImage: grafana/grafana:9.3.6
-
   deployment:
+    replicas: 3
+    envFrom:
+
     env:
     - name: GF_DATABASE_TYPE
       value: postgres
     - name: GF_DATABASE_HOST
-      valueFrom: grafana-db-primary:5432
+      value: grafana-db-primary:5432
     - name: GF_DATABASE_NAME
       value: grafana-db
     - name: GF_DATABASE_USER
       valueFrom:
         secretKeyRef:
-          name: "grafana-db-pguser-grafana-db"
           key: "user"
+          name: "grafana-db-pguser-grafana-db"
     - name: GF_DATABASE_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: "grafana-db-pguser-grafana-db"
           key: "password"
-    replicas: 3
+          name: "grafana-db-pguser-grafana-db"
+  
   ingress:
     enabled: False
   config:
