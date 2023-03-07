@@ -31,7 +31,7 @@ spec:
       level: "warn"
     auth.anonymous:
       enabled: False
-    # database:
+    database:
       # host: grafana-db-primary:5432
       # name: grafana-db
       # #TODO replace credentials here
