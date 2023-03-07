@@ -17,10 +17,10 @@ spec:
       value: one
     - name: GF_DATABASE_PASSWORD
       value: one
-    - name: GF_DATABASE_MODE
-      value: require
-    - name: GF_DATABASE_TYPE
-      value: postgres
+    # - name: GF_DATABASE_MODE
+    #   value: require
+    # - name: GF_DATABASE_TYPE
+    #   value: postgres
 
     replicas: 3
   ingress:
@@ -37,8 +37,8 @@ spec:
       # #TODO replace credentials here
       # user: placeholder
       # password: placeholder
-      # ssl_mode: require
-      # type: postgres
+      ssl_mode: require
+      type: postgres
   dashboardLabelSelector:
     - matchExpressions:
         - {key: app, operator: In, values: [grafana]}
