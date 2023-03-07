@@ -10,18 +10,16 @@ spec:
     - name: GF_DATABASE_TYPE
       value: postgres
     - name: GF_DATABASE_HOST
-      value: grafana-db-primary:5432
+      valueFrom: grafana-db-primary:5432
     - name: GF_DATABASE_NAME
       value: grafana-db
     - name: GF_DATABASE_USER
       value: one
     - name: GF_DATABASE_PASSWORD
-      value: one
-    # - name: GF_DATABASE_MODE
-    #   value: require
-    # - name: GF_DATABASE_TYPE
-    #   value: postgres
-
+      valueFrom:
+        secretKeyRef:
+          name: grafana-db-pguser-grafana-db
+          key: password
     replicas: 3
   ingress:
     enabled: False
@@ -32,11 +30,6 @@ spec:
     auth.anonymous:
       enabled: False
     database:
-      # host: grafana-db-primary:5432
-      # name: grafana-db
-      # #TODO replace credentials here
-      # user: placeholder
-      # password: placeholder
       ssl_mode: require
       type: postgres
   dashboardLabelSelector:
