@@ -16,13 +16,13 @@ spec:
     - name: GF_DATABASE_USER
       valueFrom:
         secretKeyRef:
-          name: grafana-db-pguser-grafana-db
-          key: user
+          name: "grafana-db-pguser-grafana-db"
+          key: "user"
     - name: GF_DATABASE_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: grafana-db-pguser-grafana-db
-          key: password
+          name: "grafana-db-pguser-grafana-db"
+          key: "password"
     replicas: 3
   ingress:
     enabled: False
