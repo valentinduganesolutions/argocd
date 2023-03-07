@@ -16,16 +16,19 @@ spec:
     - name: GF_DATABASE_NAME
       value: grafana-db
     - name: GF_DATABASE_USER
+      value: one
+    - name: GF_DATABASE_PASSWORD
+      value: one
+    - name: GF_DATABASE_TEST
       valueFrom:
         secretKeyRef:
           key: "user"
           name: "grafana-db-pguser-grafana-db"
-    - name: GF_DATABASE_PASSWORD
+    - name: GF_DATABASE_TESTPASS
       valueFrom:
         secretKeyRef:
           key: "password"
           name: "grafana-db-pguser-grafana-db"
-  
   ingress:
     enabled: False
   config:
