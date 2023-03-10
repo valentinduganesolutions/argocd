@@ -1,7 +1,7 @@
 helmCharts:
   - name: nginx-ingress
     repo: https://github.com/kubernetes/ingress-nginx
-    version: 4.5.2
+    version: 4.4.0
     releaseName: ingress-nginx
     namespace: ingress-nginx
     includeCRDs: true
