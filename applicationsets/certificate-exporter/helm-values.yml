@@ -1,0 +1,44 @@
+prometheusServiceMonitor:
+  extraLabels:
+    app: prometheus
+    role: service-monitor
+prometheusRules:
+  extraLabels:
+    app: prometheus
+    role: prometheus-rule
+secretsExporter:
+  secretTypes:
+  - type: kubernetes.io/service-account-token
+    key: ca.crt
+  - type: Opaque
+    key: tls.crt
+  - type: Opaque
+    key: ca.crt
+  - type: Opaque
+    key: elk-0-es-default-0.tls.crt
+  - type: Opaque
+    key: elk-0-es-default-1.tls.crt
+  - type: Opaque
+    key: elk-0-es-default-2.tls.crt
+  - type: Opaque
+    key: dns.crt
+  - type: Opaque
+    key: cluster-operator.crt
+  - type: Opaque
+    key: entity-operator.crt
+  - type: Opaque
+    key: kf-kafka-0.crt
+  - type: Opaque
+    key: kf-kafka-1.crt
+  - type: Opaque
+    key: kf-kafka-2.crt
+  - type: Opaque
+    key: kf-zookeeper-0.crt
+  - type: Opaque
+    key: kf-zookeeper-1.crt
+  - type: Opaque
+    key: kf-zookeeper-2.crt
+  - type: Opaque
+    key: kafka-exporter.crt
+  - type: Opaque
+    key: root.crt
