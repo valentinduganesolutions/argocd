@@ -1,9 +1,0 @@
-# For more values check here: https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
-
-controller:
-  replicaCount: 3
-  config:                  # Configuration are stored in nginx-ingress-ingress-nginx-controller configmap 
-    proxy-body-size: 10m   # CHECK WITH: kubectl -n ingress-nginx nginx-ingress-ingress-nginx-controller-XXXXXXXXXX-XXXXX -- grep client_max_body_size /etc/nginx/nginx.conf
-    proxy-read-timeout: 600
-
-
